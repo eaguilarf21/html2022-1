@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularios</title>
+</head>
+<body>
+    <h1>Registro de Alumnos:</h1>
+
+    <form action="">
+        <input type="text" placeholder="DNI" minlength="8" required>
+        <br>
+        <label for="nom">Nombre:</label>
+        <input type="text" id="nom">
+        <br>
+        <label for="ape">Apellido:</label>
+        <input type="text" id="ape" placeholder="Apellido">
+        <br>
+        <input type="email" placeholder="Email" required>
+        <br>
+        <input type="password" placeholder="Contraseña">
+        <br>
+        <label for="fecha">Fecha Nac: </label>
+        <input type="date" id="fecha">
+        <br>
+        <label for="combo">Distrito</label>
+        <select id="combo">
+            <option>SJM</option>
+            <option>SJL</option>
+            <option>VMT</option>
+            <option>Lince</option>
+        </select>
+        <br>
+        <label>Genero:</label>
+        <label>
+            <input type="radio" name="genero"> Masculino
+        </label>
+        <br>
+        <label>Biografia</label><br>
+        <textarea cols="40" rows="3"></textarea>
+        <br>
+     
+        <label>
+            <input type="radio" name="genero"> Femenino
+        </label>
+        <br><br><br>
+        <label>
+            <input type="checkbox"> Acepto la publicidad
+        </label>
+        <br><br>
+        <input type="reset" value="Limpiar">
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
