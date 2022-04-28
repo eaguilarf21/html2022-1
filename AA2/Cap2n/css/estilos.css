@@ -1,0 +1,49 @@
+/*
+selector{
+    propiedad:valor
+    propiedad:valor2
+} */
+
+/*selector universal*/
+*{
+    text-decoration: underline;
+}
+
+/*selector de etiqueta*/ /*jerarquia*/
+nav{
+    background:steelblue;    
+    border: 10px dotted orange;
+}
+
+h2{
+    color:red
+}
+
+/*selector de clase*/ /*jerarquia*/
+.titulo{
+    text-align: center;
+    color:purple
+}
+
+.clasex{
+    border: 10px solid orange;
+}
+
+.😒{
+    color: darkblue;
+    font-size: 30px;
+}
+/*selector de id*/ /*jerarquia*/
+#idsec
+{
+    color:blue;
+}
+
+/*selector universal*/
+
+
+/*
+{
+
+}
+*/
