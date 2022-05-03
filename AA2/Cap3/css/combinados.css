@@ -1,0 +1,51 @@
+
+/*selectores combinados*/
+h2,h3{
+    font-size: 25px;
+    font-family: Arial;
+}
+
+
+nav.contenedor{
+    font-family: 'Times New Roman';
+    font-size: 50px;
+}
+
+/*selectores de descendientes*/
+.contenedor p{/*contenido en ... (dentro)*/
+    color:red;
+}
+
+.contenedor>p{/*hijo directo*/
+    color: aquamarine;   
+}
+
+.contenedor a{
+    text-decoration: none;
+}
+
+.contenedor>a{
+   background-color: salmon;
+   font-weight: bold;
+}
+
+h2+p{/*hermanos adyacentes*/
+    text-decoration:underline;
+}
+
+
+h2~p{/*hermanastros*/
+    font-weight: bold;
+}
+
+h3~p{/*hermanastros*/
+    color: gold;
+}
+
+
+/*
+{}
+[]
+^
+~
+*/
