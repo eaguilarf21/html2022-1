@@ -1,0 +1,40 @@
+body{
+    margin:0;
+}
+
+.box{
+    width: 200px;/*ancho*/
+    height: 100px; /*alto*/
+}
+
+.box1{
+    background:steelblue;
+    margin-top: 50px;
+    margin-bottom: 40px;
+    margin-left: 10px;
+    margin-right: 10px; 
+    /* margin:50px 10px 40px 12px;top rig bott lef */
+    /*margin:100px 10px;*/
+    /*margin:100px 0 10px;*/
+    
+    
+    /*opacity: 0.5;*/
+
+    /*margin:auto*/
+    margin-left: auto;
+    margin-right: auto;
+    margin:0 auto;
+}
+
+.box2{
+    background:salmon;
+    /*border: 10px solid black;
+    border: 10px 10px 100px 10px;*/
+
+}
+/*
+{}
+[]
+^
+~
+*/

@@ -16,7 +16,7 @@ nav.contenedor{
     color:red;
 }
 
-.contenedor>p{/*hijo directo*/
+.contenedor>p{/*primer hijo*/
     color: aquamarine;   
 }
 
