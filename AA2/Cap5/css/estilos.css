@@ -1,0 +1,55 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.enlaces{
+    text-decoration: none;
+    background-color: crimson;
+    color: white;
+    /* display: block; 
+    width: 500px;
+    height: 100px; */
+    display: block;
+    margin-top: 30px;
+}
+
+
+.header{
+    height:400px;
+    background-color:green;
+    color: white;
+
+    height: 300px;
+}
+
+.header{
+    height: 150px;
+}
+
+body>header>h2.title#title{
+    font-size: 70px;
+    color: red;
+}
+
+.title{
+    font-size: 10px;
+    color: white;
+}
+
+
+/*prioridades
+1000 - css en linea
+100 - id
+10 - clases
+1 - elementos
+*/
+
+
+/*
+{}
+[]
+^
+~
+*/

@@ -1,0 +1,41 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.box{
+    background-color: orange;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    margin-top: 40px;
+
+    /* border: 10px dashed black; */
+    
+    /*border-width: 10px 20px 30px;
+    border-style: dashed solid;
+    border-color: pule;*/
+
+    border-top: 10px solid purple;
+    border-bottom: 20px dotted red;
+
+    /* border-top-width: ;
+    border-top-style: ;
+    border-top-color: ;
+    border-left-width: ;
+    border-left-style: ;
+    border-left-color: ;
+    border-right-width: ;
+    border-right-style: ;
+    border-right-color: ;
+    border-bottom-width: ;
+    border-bottom-style: ;
+    border-bottom-color: ; */
+}
+/*
+{}
+[]
+^
+~
+*/

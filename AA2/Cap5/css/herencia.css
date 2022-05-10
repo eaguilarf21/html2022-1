@@ -1,0 +1,26 @@
+
+
+.header{
+    height:400px;
+    background-color:salmon;
+    color: white;
+    font-family: Arial;
+    height: 300px;
+    border: 5px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+.title{
+    font-size: 15px;
+    border: inherit;
+    padding: inherit;
+    font-family: Helvetica;
+    text-align: initial;
+}
+/*
+{}
+[]
+^
+~
+*/
