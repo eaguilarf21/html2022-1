@@ -1,0 +1,20 @@
+*{/*limpiar los estilos por defecto del navegador*/
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.imagen{
+    display: block;
+    width: 400px;
+    margin: 30px auto;
+}
+
+.box
+{
+    width: 100px;
+    height: 100px;
+    margin: 30px;
+    background-color: steelblue;  
+}
+
