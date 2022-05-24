@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Jugando con variables</title>
+    <link rel="stylesheet" href="./css/micss2.css">
+    <script>
+        var nombre = "Enrique", apellido = "Aguilar";
+        nombre = prompt("Ingrese nombre: ");
+        apellido = prompt("Ingrese su apellido");
+
+        var edad;
+        edad = prompt("Ingrese edad");
+
+        var resta = prompt("Ingrese cantidad a restar");
+
+        //edad = edad-resta;
+        edad -= resta;
+        
+    </script>
+</head>
+
+<body>
+    <div class="contenedor">
+        <div class="header">
+            <p class="logo">Curso JavaScript</p>
+        </div>
+        <div class="contenido">
+            <div class="principal">
+                <h1>Jugando con las variables</h1>
+                <script>
+                    document.write("<p>");
+                    document.write("Bienvenido " + nombre + " " + apellido + "<br/>" + "A ti te gustaria tener " + edad);
+                    document.write("</p>");                    
+                </script>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
