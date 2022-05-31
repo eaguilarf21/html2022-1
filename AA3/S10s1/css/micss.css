@@ -1,0 +1,21 @@
+
+
+body{
+	background-color:#334873;
+}
+
+h1{
+	color:#FC0;
+	border-top:2px solid #FFF;
+	border-bottom:2px solid #FFF;
+	padding-bottom:50px;
+	text-align:center;
+}
+
+p{
+	color:#FC0;
+	font-size:2em;
+}
+
+p span{font-size:2em;
+}
