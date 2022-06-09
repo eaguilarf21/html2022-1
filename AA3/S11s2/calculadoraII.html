@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora II</title>
+    <script>
+
+        var repetir = "si";
+
+        while(repetir == "si")
+        {
+            function suma(num1,num2)
+            {
+                alert("La suma es: "+ (num1+num2))
+            }
+            function resta(num1,num2)
+            {
+                alert("La resta es: "+ (num1-num2))
+            }
+            function multiplicar(num1,num2)
+            {
+                alert("La multiplicacion es: "+ (num1*num2))
+            }
+            function dividir(num1,num2)
+            {
+                alert("La division es: "+ (num1/num2))
+            }
+
+            var ope = prompt("Que operacion deseas?:");
+            var numero1 = parseInt(prompt("Ingresa el primer numero:"));
+            var numero2 = parseInt(prompt("Ingresa el segundo numero:"));
+
+            if (ope == "sumar")
+            {
+                suma(parseInt(numero1),parseInt(numero2));
+            }
+            else if (ope == "restar")
+            {
+                resta(numero1,numero2);
+            }
+            else if (ope == "multiplicar")
+            {
+                multiplicar(numero1,numero2);
+            }
+            else if (ope == "dividir")
+            {
+                dividir(numero1,numero2);
+            }
+            else
+            {
+                alert("operacion no contemplada");
+            }
+            
+            repetir = prompt("desea repetir (si/no)?")
+        }
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

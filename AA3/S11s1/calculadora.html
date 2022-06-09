@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <script>
+        var num1 = parseFloat(prompt("Ingrese el primer numero"));
+        var num2 = parseFloat(prompt("Ingrese el segundo numero"));
+        
+        if (!isNaN(num1) && !isNaN(num2))
+        {
+
+            var ope = prompt("Ingresa suma/resta/multiplicacion/division").toLowerCase();
+
+            
+            if (ope == "suma")
+            {
+                alert(num1+num2);
+            }
+            else if (ope == "resta")
+            {
+                alert(num1-num2);
+            }
+            else if (ope == "multiplicacion" || ope == "multiplicación")
+            {
+                alert(num1*num2);
+            }
+            else if (ope == "division" || ope == "división")
+            {
+                alert(num1/num2);
+            }
+            else
+            {
+                alert("operacion no contemplada");
+            }
+        }
+        else{
+            alert("no es un numero")
+        }
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
