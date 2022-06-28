@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion de usuarios</title>
+</head>
+<body>
+    <h1>Area de registro</h1>
+    <input type="email" id="usr" placeholder="Ingrese su email">
+    <input type="password" id="pwd" placeholder="Ingrese su contraseña">
+    <button id="btnEnviar">Enviar</button>
+    <h1 id="login"></h1>
+
+    <h1>Area de acceso</h1>
+    <!-- el id no puede ser el mismo... sabes que solo debe haber un id en toda la pagina -->
+    <input type="email" id="usrAcc" placeholder="Ingrese su email">
+    <input type="password" id="pwdAcc" placeholder="Ingrese su contraseña">
+    <button id="btnAcceder">Acceder</button>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.3/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.8.3/firebase-auth.js";
+
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyCQAZ5bNRB6_CH11xXoftwdP0PEnK-WuSg",
+          authDomain: "login2-bdf15.firebaseapp.com",
+          projectId: "login2-bdf15",
+          storageBucket: "login2-bdf15.appspot.com",
+          messagingSenderId: "251555100228",
+          appId: "1:251555100228:web:3b92b4561c16323cfd6e11"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);        
+
+        document.getElementById("btnEnviar").addEventListener("click", () =>
+            {
+                var correo = document.getElementById("usr").value;
+                var password = document.getElementById("pwd").value;
+
+                createUserWithEmailAndPassword(auth, correo, password)
+                .then((userCredential) => {
+                    // Signed in
+                    const user = userCredential.user;
+                    // ...
+                    alert("Usuario creado");
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    // ..
+                    alert("Mensaje de error:" + error.code + "-"+ error.message);
+                });
+            }
+        )
+
+        document.getElementById("btnAcceder").addEventListener("click",() =>
+            {
+                var correo = document.getElementById("usrAcc").value;
+                var password = document.getElementById("pwdAcc").value;
+
+                signInWithEmailAndPassword(auth, correo, password)
+                .then((userCredential) => {
+                    // Signed in
+                    const user = userCredential.user;
+                    // ...
+                    alert("Acceso correcto");
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert("Mensaje de error:" + error.code + "-"+ error.message);
+                });
+            })
+    </script>
+</body>
+</html>
