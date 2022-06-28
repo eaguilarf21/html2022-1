@@ -11,7 +11,8 @@
     <input type="email" id="usr" placeholder="Ingrese su email">
     <input type="password" id="pwd" placeholder="Ingrese su contraseña">
     <button id="btnEnviar">Enviar</button>
-    <h3 id="login"> </h3>
+    <h3 id="login"></h3>
+    <button id='btnCerrar'>Cerrar</button>
 
     <h1>Area de acceso</h1>
     <!-- el id no puede ser el mismo... sabes que solo debe haber un id en toda la pagina -->
@@ -23,7 +24,7 @@
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.3/firebase-app.js";
         // TODO: Add SDKs for Firebase products that you want to use
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.8.3/firebase-auth.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.8.3/firebase-auth.js";
 
         // https://firebase.google.com/docs/web/setup#available-libraries
       
@@ -40,21 +41,6 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);        
-
-        onAuthStateChanged(auth, (user) => {
-        if (user) {
-            // User is signed in, see docs for a list of available properties
-            // https://firebase.google.com/docs/reference/js/firebase.User
-            const uid = user.uid;
-            // ...
-            document.getElementById("login").innerHTML="<p> Logueado como "+ user.email +"</p>";
-
-        } else {
-            // User is signed out
-            // ...
-            document.getElementById("login").innerHTML="No Logueado";
-        }
-        });
 
         document.getElementById("btnEnviar").addEventListener("click", () =>
             {
@@ -92,6 +78,48 @@
                 .catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
+                    alert("Mensaje de error:" + error.code + "-"+ error.message);
+                });
+            })
+
+        
+
+        function cerrar()
+        {
+            signOut(auth).then(() => {
+            // Sign-out successful.
+                alert("Cerraste sesion correctamente")
+            }).catch((error) => {
+            // An error happened.
+                alert("Mensaje de error:" + error.code + "-"+ error.message);
+            });
+        }
+
+        
+        onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/firebase.User
+            const uid = user.uid;
+            // ...
+            document.getElementById("btnCerrar").disabled=false;
+            document.getElementById("login").innerHTML="Logueado como "+ user.email;
+
+        } else {
+            // User is signed out
+            // ...
+            document.getElementById("btnCerrar").disabled=true;
+            document.getElementById("login").innerHTML="No Logueado";
+        }
+        });
+
+        document.getElementById("btnCerrar").addEventListener("click",() =>
+            {                
+                signOut(auth).then(() => {
+                // Sign-out successful.
+                    alert("Cerraste sesion correctamente")
+                }).catch((error) => {
+                // An error happened.
                     alert("Mensaje de error:" + error.code + "-"+ error.message);
                 });
             })
