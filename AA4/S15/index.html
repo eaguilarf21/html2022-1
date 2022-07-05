@@ -33,6 +33,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-app.js";
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
+        import { getFirestore,doc, setDoc } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js";
       
         // Your web app's Firebase configuration
         const firebaseConfig = {
@@ -46,10 +47,14 @@
       
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
+        // Initialize Cloud Firestore and get a reference to the service
+        const db = getFirestore(app);
+
+
 
         const formulario = document.getElementById("task-form");
 
-        formulario.addEventListener("submit", (e)=>
+        formulario.addEventListener("submit", async(e)=>
         {
             //evita refrescar la pagina
             e.preventDefault();
@@ -57,7 +62,17 @@
             const title = formulario["task-title"].value;
             const description = formulario["task-description"].value;
 
-            console.log(title,description);
+            /*//console.log(title,description);
+            // Add a new document in collection "cities"
+            const respuesta = await setDoc(doc(db, "tareas", "LA"), {
+            titulo: title,
+            descripcion: description
+            });*/
+
+            
+
+            console.log(respuesta);
+
         })
       </script>
 </body>
