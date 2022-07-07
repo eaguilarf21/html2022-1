@@ -15,7 +15,7 @@
                     <div class="card-body">
                         <form id="task-form">
                             <div class="form-group">
-                                <input type="text" class="form-control" id="task-title" placeholder="Titulo">
+                                <input type="text" class="form-control" id="task-title" autofocus placeholder="Titulo">
                             </div>
                             <div class="form-group">
                                 <textarea id="task-description" class="form-control" rows="3" placeholder="Descripcion"></textarea>
@@ -24,7 +24,11 @@
                         </form>
                     </div>
                 </div>
+                <div class="col-md-6" id="task-container">
+
+                </div>
             </div>
+
         </div>
     </div>
     
@@ -33,7 +37,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-app.js";
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
-        import { getFirestore,doc, setDoc } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, addDoc, collection, getDocs, query, onSnapshot } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js";
       
         // Your web app's Firebase configuration
         const firebaseConfig = {
@@ -67,13 +71,54 @@
             const respuesta = await setDoc(doc(db, "tareas", "LA"), {
             titulo: title,
             descripcion: description
-            });*/
+            });*/            
 
+            // Add a new document with a generated id.
+            const docRef = await addDoc(collection(db, "tasks"), {
+            titulo: title,
+            descripcion: description
+            });
+            //console.log("Document written with ID: ", docRef.id);
+
+            formulario.reset();
+
+            //lista de nuevo la base de datos
+        })
+
+        window.addEventListener("DOMContentLoaded", async()=>{    
+            const container = document.getElementById("task-container");
+
+            /*const querySnapshot = await getDocs(collection(db, "tasks"));
+
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+                container.innerHTML =  container.innerHTML +
+                "<div class=card card-body mt-2 border-primary>"+
+                    "<h3>"+doc.data().titulo+"</h3>"+
+                    "<p>"+doc.data().descripcion+"</p>"+
+                    "<div>"+
+                    '<button class="btn btn-primary">Delete</button>'+
+                    "</div>"+
+                    "</div>";
+            });    */ 
             
 
-            console.log(respuesta);
+            const q = query(collection(db, "tasks"));
 
-        })
+            const unsubscribe = onSnapshot(q, (querySnapshot) => {
+  querySnapshot.forEach(     (doc) =>  { 
+                                            container.innerHTML =  container.innerHTML +
+                                            "<div class=card card-body mt-2 border-primary>"+
+                                            "<h3>"+doc.data().titulo+"</h3>"+
+                                            "<p>"+doc.data().descripcion+"</p>"+
+                                            "<div>"+
+                                            '<button class="btn btn-primary">Delete</button>'+
+                                            "</div>"+
+                                            "</div>";
+                                        });
+                                                                });            
+    });
       </script>
 </body>
 </html>
