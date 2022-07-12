@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +8,7 @@
     <title>Base de Datos</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/simplex/bootstrap.min.css">
 </head>
+
 <body>
     <div class="container">
         <div class="row">
@@ -18,9 +20,10 @@
                                 <input type="text" class="form-control" id="task-title" autofocus placeholder="Titulo">
                             </div>
                             <div class="form-group">
-                                <textarea id="task-description" class="form-control" rows="3" placeholder="Descripcion"></textarea>
+                                <textarea id="task-description" class="form-control" rows="3"
+                                    placeholder="Descripcion"></textarea>
                             </div>
-                            <button class="btn btn-primary" id="btnGuardar">Guardar</button>       
+                            <button class="btn btn-primary" id="btnGuardar">Guardar</button>
                         </form>
                     </div>
                 </div>
@@ -31,24 +34,24 @@
 
         </div>
     </div>
-    
+
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-app.js";
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
-        import { getFirestore, doc, setDoc, addDoc, collection, getDocs, query, onSnapshot } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js";
-      
+        import { getFirestore, setDoc, addDoc, collection, getDocs, query, onSnapshot, doc, deleteDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js";
+
         // Your web app's Firebase configuration
         const firebaseConfig = {
-          apiKey: "AIzaSyBG_S3jsiw0jAdZ8_I5hh2VM6TjRxQ0p-I",
-          authDomain: "basededatos2-351fb.firebaseapp.com",
-          projectId: "basededatos2-351fb",
-          storageBucket: "basededatos2-351fb.appspot.com",
-          messagingSenderId: "1044684188422",
-          appId: "1:1044684188422:web:d65ddb81b3417b2d2b4c87"
+            apiKey: "AIzaSyBG_S3jsiw0jAdZ8_I5hh2VM6TjRxQ0p-I",
+            authDomain: "basededatos2-351fb.firebaseapp.com",
+            projectId: "basededatos2-351fb",
+            storageBucket: "basededatos2-351fb.appspot.com",
+            messagingSenderId: "1044684188422",
+            appId: "1:1044684188422:web:d65ddb81b3417b2d2b4c87"
         };
-      
+
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         // Initialize Cloud Firestore and get a reference to the service
@@ -57,35 +60,45 @@
 
 
         const formulario = document.getElementById("task-form");
+        var editStatus = false;
+        var id = 0;
 
-        formulario.addEventListener("submit", async(e)=>
-        {
+        formulario.addEventListener("submit", async (e) => {
             //evita refrescar la pagina
             e.preventDefault();
 
             const title = formulario["task-title"].value;
             const description = formulario["task-description"].value;
-
-            /*//console.log(title,description);
-            // Add a new document in collection "cities"
-            const respuesta = await setDoc(doc(db, "tareas", "LA"), {
-            titulo: title,
-            descripcion: description
-            });*/            
-
-            // Add a new document with a generated id.
-            const docRef = await addDoc(collection(db, "tasks"), {
-            titulo: title,
-            descripcion: description
-            });
-            //console.log("Document written with ID: ", docRef.id);
+            
+            //guardar registro
+            var docRef;
+            if (!editStatus)
+            {
+                // Add a new document with a generated id.
+                    docRef = await addDoc(collection(db, "tasks"), {
+                    titulo: title,
+                    descripcion: description
+                });               
+            }
+            else //guardar edicion
+            {
+                //console.log(title,description);
+                // Add a new document in collection "cities"
+                const respuesta = await setDoc(doc(db, "tasks",id), {
+                titulo: title,
+                descripcion: description
+                });
+                editStatus=false;
+                formulario['btnGuardar'].innerText = "Guardar";
+            }
+            
 
             formulario.reset();
 
             //lista de nuevo la base de datos
         })
 
-        window.addEventListener("DOMContentLoaded", async()=>{    
+        window.addEventListener("DOMContentLoaded", async () => {
             const container = document.getElementById("task-container");
 
             /*const querySnapshot = await getDocs(collection(db, "tasks"));
@@ -101,24 +114,56 @@
                     '<button class="btn btn-primary">Delete</button>'+
                     "</div>"+
                     "</div>";
-            });    */ 
-            
+            });    */
+
 
             const q = query(collection(db, "tasks"));
 
             const unsubscribe = onSnapshot(q, (querySnapshot) => {
-  querySnapshot.forEach(     (doc) =>  { 
-                                            container.innerHTML =  container.innerHTML +
-                                            "<div class=card card-body mt-2 border-primary>"+
-                                            "<h3 class='h5'>"+doc.data().titulo+"</h3>"+
-                                            "<p>"+doc.data().descripcion+"</p>"+
-                                            "<div>"+
-                                            '<button class="btn btn-primary">Delete</button>'+
-                                            "</div>"+
-                                            "</div>";
-                                        });
-                                                                });            
-    });
-      </script>
+                container.innerHTML = "";
+                querySnapshot.forEach((docu) => {
+                    container.innerHTML = container.innerHTML +
+                        "<div class='card card-body mt-2 border-primary'>" +
+                        "<h3 class='h5'>" + docu.data().titulo + "</h3>" +
+                        "<p>" + docu.data().descripcion + "</p>" +
+                        "<div>" +
+                        "<button class='btn btn-primary btn-delete' data-id='"+docu.id+"'>Delete</button>" +
+                        "<button class='btn btn-secondary btn-edit' data-id='"+docu.id+"'>Edit</button>" +
+                        "</div>" +
+                        "</div>";
+                        
+                        const botonesDelete = document.querySelectorAll(".btn-delete");
+                        //console.log(botones);
+                        botonesDelete.forEach( (btn) => { btn.addEventListener("click", async (e) =>
+                                                                                { await deleteDoc(doc(db, "tasks", e.target.dataset.id));}
+                                                                                ) })
+                        
+                        const botonesEdit = document.querySelectorAll(".btn-edit");
+                        botonesEdit.forEach( (btn) => { btn.addEventListener("click", async (e) =>
+                                                                                {    
+                                                                                    editStatus=true;   
+                                                                                    id = e.target.dataset.id;                                                                              
+                                                                                    const docuRef = doc(db, "tasks", e.target.dataset.id);                                                                                    
+                                                                                    const docuSnap = await getDoc(docuRef);
+
+                                                                                    if (docuSnap.exists()) {
+                                                                                        formulario["task-title"].value = docuSnap.data().titulo;
+                                                                                        formulario["task-description"].value =docuSnap.data().descripcion;
+                                                                                    } else {
+                                                                                    // doc.data() will be undefined in this case
+                                                                                    console.log("No such document!");
+                                                                                    }  
+                                                                                    formulario['btnGuardar'].innerText = "Actualizar";
+                                                                                 }
+                                                                                ) })
+
+
+                                                                            
+                        
+                });
+            });
+        });
+    </script>
 </body>
+
 </html>
